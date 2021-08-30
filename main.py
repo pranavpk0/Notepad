@@ -4,14 +4,14 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 import os
 
 
-def newFile():
+def newfile():
     global file
     root.title("Untitled - Notepad")
     file = None
     TextArea.delete(1.0, END)
 
 
-def openFile():
+def openfile():
     global file
     file = askopenfilename(defaultextension=".txt",
                            filetypes=[("All Files", "*.*"),
@@ -26,7 +26,7 @@ def openFile():
         f.close()
 
 
-def saveFile():
+def savefile():
     global file
     if file is None:
         file = asksaveasfilename(initialfile='.txt', defaultextension=".txt",
@@ -50,10 +50,6 @@ def saveFile():
         f.close()
 
 
-def quitApp():
-    root.destroy()
-
-
 def cut():
     TextArea.event_generate("<>")
 
@@ -75,17 +71,16 @@ root.title("Untitled - Notepad")
 root.wm_iconbitmap("icon.ico")
 root.geometry("1024x724")
 
-TextArea = Text(root, font="arial_black 20", bg="black", fg="green")
+TextArea = Text(root, font="arial_black 20")
 file = None
 TextArea.pack(expand=True, fill=BOTH)
 
 MenuBar = Menu(root)
 
 FileMenu = Menu(MenuBar, tearoff=0, bg="black", fg="green", font="15")
-FileMenu.add_command(label="New", command=newFile)
-FileMenu.add_command(label="Open", command=openFile)
-FileMenu.add_command(label="Save", command=saveFile)
-FileMenu.add_command(label="Exit", command=quitApp)
+FileMenu.add_command(label="New", command=newfile)
+FileMenu.add_command(label="Open", command=openfile)
+FileMenu.add_command(label="Save", command=savefile)
 MenuBar.add_cascade(label="File", menu=FileMenu)
 
 EditMenu = Menu(MenuBar, tearoff=0, bg="black", fg="green", font="15", bd="0")
